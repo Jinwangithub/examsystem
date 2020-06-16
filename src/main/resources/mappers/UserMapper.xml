@@ -3,5 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wj.dao.UserMapper">
+    <!-- 用户登录验证 -->
+    <select id="login" parameterType="User" resultType="User">
+        select * from tb_user where username=#{username}
+    </select>
 
+    <update id="updatepassword" parameterType="User">
+        update tb_user set password=#{password} where id=#{id}
+    </update>
 </mapper>
