@@ -2,5 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wj.dao.BasicInfoMapper">
+    <!-- 查询所有院系 -->
+    <select id="selAllDepart" resultType="Depart">
+        select * from depart;
+    </select>
 
+    <!-- 院系名称添加 -->
+    <insert id="insDepart" parameterType="Depart">
+        insert into depart(depart) VALUES (#{depart});
+    </insert>
+
+    <!-- 查询所有职称信息 -->
+    <select id="selAllSit" resultType="Sit">
+        select * from sit;
+    </select>
+
+    <!-- 添加职称-->
+    <insert id="insSit" parameterType="Sit">
+        insert into sit(sit) values(#{sit});
+    </insert>
 </mapper>

@@ -268,7 +268,7 @@
                                 </div>
                                 <div class="modal-body" style="text-align:left">
                                     <div class="form-group input-group">
-                                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入院系:</span>
+                                        <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入职称:</span>
                                         <input type="text" style="height: 40px " class="form-control" name="sit">
                                     </div>
                                 </div>

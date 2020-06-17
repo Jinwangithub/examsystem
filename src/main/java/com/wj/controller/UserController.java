@@ -1,14 +1,20 @@
 package com.wj.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.wj.pojo.Teacher;
 import com.wj.pojo.User;
 import com.wj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -36,14 +42,14 @@ public class UserController {
                 model.addAttribute("message","用户名或密码错误");
                 return "page/loginInfo";
             }
-        }else{
+        }else{//用户名错误
             model.addAttribute("message","用户名或密码错误");
             return "page/loginInfo";
         }
     }
 
     /**
-     * 用户名或密码错误时，返回登录界面
+     * 返回登录界面
      * @return
      */
     @RequestMapping(value = "index.do")
@@ -63,8 +69,6 @@ public class UserController {
         model.addAttribute("user",user);
         return "page/admin/uppassword";
     }
-
-
     /**
      * 修改密码
      * @param user
@@ -78,6 +82,106 @@ public class UserController {
         return "page/loginInfo";
     }
 
+    /**
+     * 管理员退出登录：清除session
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "logout.do")
+    public String logout(HttpServletRequest request,Model model){
+        HttpSession session = request.getSession();
+        session.removeAttribute("usersession");
+        model.addAttribute("message","退出成功");
+        return "page/loginInfo";
+    }
+
+    /**
+     * 查询所有教师信息
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "findallteacher.do")
+    public String findallteacher(Model model){
+        List<Teacher> allTeacher = userServiceImpl.findAllTeacher();
+        model.addAttribute("teachers",allTeacher);
+        return "page/admin/teacher";
+    }
+
+    /**
+     * 创建教师信息
+     * @param teacher
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "save.do")
+    public String saveTeacher(Teacher teacher,Model model) {
+        int index = userServiceImpl.createTeacher(teacher);
+        if (index == 1) {
+            return "redirect:findallteacher.do";
+        } else {
+            model.addAttribute("message","创建失败，请重新创建");
+            return "page/admin/messageInfo";
+        }
+    }
+
+    /**
+     * 删除教师信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "delete.do")
+    public String delTeacher(int id){
+        try {
+            userServiceImpl.delTeacher(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:findallteacher.do";
+    }
+
+    /**
+     * 修改教师信息（先进行教师信息查询）
+     * @param teacher
+     * @return
+     */
+    @RequestMapping(value = "findById.do")
+    @ResponseBody
+    public Teacher findTeaById(@RequestBody Teacher teacher){
+        Teacher teacher_info = userServiceImpl.selTeacherById(teacher.getId());
+        if(teacher_info!=null){
+            return teacher_info;
+        }
+        return null;
+    }
+
+    /**
+     * 更新教师信息
+     * @param teacher
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "update.do")
+    public String updateTeacher(Teacher teacher,Model model){
+        try {
+            userServiceImpl.updTeacher(teacher);
+            model.addAttribute("message","老师信息更新成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:findallteacher.do";
+    }
+
+    /**
+     * 批量删除教师信息
+     * @param chk_value
+     * @return
+     */
+    @RequestMapping(value = "deletemanyteacher.do")
+    public String delManyTeacher(String chk_value){
+        userServiceImpl.delManyTeacher(chk_value);
+        return "redirect:findallteacher.do";
+    }
 
 }
 
