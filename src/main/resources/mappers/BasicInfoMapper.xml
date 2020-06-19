@@ -11,6 +11,15 @@
     <insert id="insDepart" parameterType="Depart">
         insert into depart(depart) VALUES (#{depart});
     </insert>
+    <!-- 院系名称修改 -->
+    <update id="updateDepart" parameterType="Depart">
+        update depart set depart=#{depart} where id=#{id};
+    </update>
+
+    <!-- 删除院系 -->
+    <delete id="deleteDepart" parameterType="long">
+        delete from depart where id=#{0};
+    </delete>
 
     <!-- 查询所有职称信息 -->
     <select id="selAllSit" resultType="Sit">
@@ -21,4 +30,27 @@
     <insert id="insSit" parameterType="Sit">
         insert into sit(sit) values(#{sit});
     </insert>
+
+    <!-- 修改职称 -->
+    <update id="updSit" parameterType="Sit">
+        update sit set sit=#{sit} where id=#{id};
+    </update>
+    <!-- 删除职称 -->
+    <delete id="delSit" parameterType="long">
+        delete from sit where id=#{0};
+    </delete>
+
+    <!-- 查询所有学期信息 -->
+    <select id="findAllSemester" resultType="Semester">
+        select * from semester;
+    </select>
+    <!-- 添加学期 -->
+    <insert id="insSemester" parameterType="Semester">
+      insert into semester(sename) values(#{sename});
+    </insert>
+
+    <!-- 修改学期 -->
+    <update id="updSemester" parameterType="Semester">
+        update semester set sename=#{sename} where seid=#{seid};
+    </update>
 </mapper>
