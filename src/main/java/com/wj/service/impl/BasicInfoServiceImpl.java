@@ -2,6 +2,7 @@ package com.wj.service.impl;
 
 import com.wj.dao.BasicInfoMapper;
 import com.wj.pojo.BasicInfo.Depart;
+import com.wj.pojo.BasicInfo.Major;
 import com.wj.pojo.BasicInfo.Semester;
 import com.wj.pojo.BasicInfo.Sit;
 import com.wj.service.BasicInfoService;
@@ -69,6 +70,16 @@ public class BasicInfoServiceImpl implements BasicInfoService{
     @Override
     public void updSemester(Semester semester) {
         basicInfoMapper.updSemester(semester);
+    }
+    /* 查询所有专业 */
+    @Override
+    public List<Major> selAllMajor(long seid) {
+        return basicInfoMapper.selAllMajor(seid);
+    }
+    /* 添加专业 */
+    @Override
+    public void insMajor(Major major) {
+        basicInfoMapper.insMajor(major);
     }
 
 

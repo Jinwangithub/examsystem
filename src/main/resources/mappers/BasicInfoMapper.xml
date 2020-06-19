@@ -53,4 +53,14 @@
     <update id="updSemester" parameterType="Semester">
         update semester set sename=#{sename} where seid=#{seid};
     </update>
+
+    <!-- 查询所有专业 -->
+    <select id="selAllMajor" parameterType="long" resultType="Major">
+        select * from major where seid=#{0};
+    </select>
+
+    <!-- 添加专业 -->
+    <insert id="insMajor" parameterType="Major">
+        insert into major(maname,seid) values(#{maname},#{seid});
+    </insert>
 </mapper>

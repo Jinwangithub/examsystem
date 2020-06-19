@@ -1,6 +1,8 @@
 package com.wj.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.wj.pojo.BasicInfo.Depart;
+import com.wj.pojo.BasicInfo.Major;
 import com.wj.pojo.BasicInfo.Semester;
 import com.wj.pojo.BasicInfo.Sit;
 import com.wj.service.BasicInfoService;
@@ -167,5 +169,32 @@ public class BasicInfoController {
     public String updateSemester(Semester semester){
         basicInfoServiceImpl.updSemester(semester);
         return "redirect:allsemester.do";
+    }
+
+    /**
+     * 查询所有专业
+     * @param seid
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "allmajor.do")
+    public String findAllMajor(@RequestParam("seid") long seid, Model model){
+        List<Major> majors = basicInfoServiceImpl.selAllMajor(seid);
+        model.addAttribute("major",majors);
+        model.addAttribute("seid",seid);
+        return "page/admin/base_major";
+    }
+
+    /**
+     * 添加专业
+     * @param major
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "insertma")
+    public String insMajor(Major major,Model model){
+        basicInfoServiceImpl.insMajor(major);
+        model.addAttribute("seid",major.getSeid());
+        return "redirect:allmajor.do";
     }
 }

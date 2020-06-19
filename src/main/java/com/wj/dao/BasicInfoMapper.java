@@ -1,6 +1,7 @@
 package com.wj.dao;
 
 import com.wj.pojo.BasicInfo.Depart;
+import com.wj.pojo.BasicInfo.Major;
 import com.wj.pojo.BasicInfo.Semester;
 import com.wj.pojo.BasicInfo.Sit;
 
@@ -39,4 +40,10 @@ public interface BasicInfoMapper {
 
     /* 修改学期 */
     void updSemester(Semester semester);
+
+    /* 查询所有专业 */
+    List<Major> selAllMajor(long seid);
+
+    /* 添加专业 */
+    void insMajor(Major major);
 }
