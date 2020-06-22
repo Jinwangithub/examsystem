@@ -1,9 +1,7 @@
 package com.wj.service;
 
-import com.wj.pojo.BasicInfo.Depart;
-import com.wj.pojo.BasicInfo.Major;
-import com.wj.pojo.BasicInfo.Semester;
-import com.wj.pojo.BasicInfo.Sit;
+import com.wj.pojo.BasicInfo.*;
+import com.wj.pojo.Student;
 
 import java.util.List;
 
@@ -45,5 +43,20 @@ public interface BasicInfoService {
 
     /* 添加专业 */
     void insMajor(Major major);
+
+    /* 修改专业信息 */
+    void updMajor(Major major);
+
+    /* 查询班级信息 */
+    List<Blass> selByMaid(long maid);
+
+    /* 添加班级 */
+    void insClass(Blass blass);
+
+    /* 查询班级内所有学生 */
+    List<Student> selByCname(String cname);
+
+    /* 添加学生信息 */
+    void insStudent(Student student);
 
 }

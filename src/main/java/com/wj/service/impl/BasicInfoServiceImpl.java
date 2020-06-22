@@ -1,10 +1,8 @@
 package com.wj.service.impl;
 
 import com.wj.dao.BasicInfoMapper;
-import com.wj.pojo.BasicInfo.Depart;
-import com.wj.pojo.BasicInfo.Major;
-import com.wj.pojo.BasicInfo.Semester;
-import com.wj.pojo.BasicInfo.Sit;
+import com.wj.pojo.BasicInfo.*;
+import com.wj.pojo.Student;
 import com.wj.service.BasicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +78,31 @@ public class BasicInfoServiceImpl implements BasicInfoService{
     @Override
     public void insMajor(Major major) {
         basicInfoMapper.insMajor(major);
+    }
+    /* 修改专业信息 */
+    @Override
+    public void updMajor(Major major) {
+        basicInfoMapper.updMajor(major);
+    }
+    /* 查询班级信息 */
+    @Override
+    public List<Blass> selByMaid(long maid) {
+        return basicInfoMapper.selByMaid(maid);
+    }
+    /* 添加班级 */
+    @Override
+    public void insClass(Blass blass) {
+        basicInfoMapper.insClass(blass);
+    }
+    /* 查询班级内所有学生 */
+    @Override
+    public List<Student> selByCname(String cname) {
+        return basicInfoMapper.selByCname(cname);
+    }
+    /* 添加学生信息 */
+    @Override
+    public void insStudent(Student student) {
+        basicInfoMapper.insStudent(student);
     }
 
 

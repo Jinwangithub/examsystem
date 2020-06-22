@@ -252,7 +252,7 @@
         <table border="1" class="table table-bordered" id = "tab1">
             <thead>
             <tr>
-                <th colspan="4" style="text-align: center;font-size: 20px ">${cname}学生信息设置</th>
+                <th colspan="4" style="text-align: center;font-size: 20px ">${cname}班学生信息设置</th>
             </tr>
             </thead>
 
@@ -334,6 +334,10 @@
                                 <div class="form-group input-group">
                                     <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入学号：</span>
                                     <input type="text" style="height: 40px " class="form-control" name="num">
+                                </div>
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入密码：</span>
+                                    <input type="text" style="height: 40px " class="form-control" name="password">
                                 </div>
                                 <div class="form-group input-group">
                                     <span class="input-group-addon" style="height: 40px ; tab-size: 16px">请输入姓名：</span>

@@ -1,10 +1,8 @@
 package com.wj.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.wj.pojo.BasicInfo.Depart;
-import com.wj.pojo.BasicInfo.Major;
-import com.wj.pojo.BasicInfo.Semester;
-import com.wj.pojo.BasicInfo.Sit;
+import com.wj.pojo.BasicInfo.*;
+import com.wj.pojo.Student;
 import com.wj.service.BasicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -197,4 +197,97 @@ public class BasicInfoController {
         model.addAttribute("seid",major.getSeid());
         return "redirect:allmajor.do";
     }
+
+    /**
+     * 修改专业名称
+     * @param major
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "upma.do")
+    public String updMajor(Major major,Model model){
+        basicInfoServiceImpl.updMajor(major);
+        model.addAttribute("seid",major.getSeid());
+        return "redirect:allmajor.do";
+    }
+
+    /**
+     * 查询班级信息
+     * @param maid
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "allclass.do")
+    public String findAllClass(@RequestParam("maid") long maid,Model model){
+        List<Blass> blasses = basicInfoServiceImpl.selByMaid(maid);
+        model.addAttribute("cla",blasses);
+        model.addAttribute("maid",maid);
+        return "page/admin/base_class";
+    }
+
+    /**
+     * 添加班级
+     * @param blass
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "insertclass.do")
+    public String insClass(Blass blass,Model model){
+        basicInfoServiceImpl.insClass(blass);
+        model.addAttribute("maid",blass.getMaid());
+        return "redirect:allclass.do";
+    }
+
+    /**
+     * 查询班级内所有学生
+     * @param cname
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "allstudent.do")
+    public String findAllStudent(@RequestParam("cname") String cname, Model model, HttpServletRequest request)
+            throws UnsupportedEncodingException {
+        request.setCharacterEncoding("utf-8");
+        List<Student> students = basicInfoServiceImpl.selByCname(cname);
+        model.addAttribute("student",students);
+        model.addAttribute("cname",cname);
+        return "page/admin/base_student";
+    }
+
+    /**
+     * 添加学生信息
+     * @param student
+     * @return
+     */
+    @RequestMapping(value = "creatstu.do")
+    public String createStudent(Student student){
+        basicInfoServiceImpl.insStudent(student);
+        return "redirect:allstudent.do?cname="+student.getClassname();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

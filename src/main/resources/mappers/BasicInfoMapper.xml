@@ -63,4 +63,29 @@
     <insert id="insMajor" parameterType="Major">
         insert into major(maname,seid) values(#{maname},#{seid});
     </insert>
+
+    <!-- 修改专业信息 -->
+    <update id="updMajor" parameterType="Major">
+        update major set maname=#{maname} where maid=#{maid};
+    </update>
+
+    <!-- 查询班级信息 -->
+    <select id="selByMaid" parameterType="long" resultType="Blass">
+        select * from class where maid=#{0};
+    </select>
+    <!-- 添加班级 -->
+    <insert id="insClass" parameterType="Blass">
+        insert into class(cname,maid) values(#{cname},#{maid});
+    </insert>
+
+    <!-- 查询班级所有学生 -->
+    <select id="selByCname" parameterType="String" resultType="Student">
+        select id,username,password, num,classname from student where classname = #{classname} order by  id asc
+    </select>
+
+    <!-- 添加学生信息 -->
+    <insert id="insStudent" parameterType="Student">
+        insert into student(username,password,classname,num)
+        values(#{username},#{password},#{classname},#{num});
+    </insert>
 </mapper>
