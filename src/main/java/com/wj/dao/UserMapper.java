@@ -1,6 +1,7 @@
 package com.wj.dao;
 
 import com.wj.pojo.BasicInfo.Sit;
+import com.wj.pojo.Point1;
 import com.wj.pojo.Teacher;
 import com.wj.pojo.User;
 
@@ -25,4 +26,10 @@ public interface UserMapper {
     void updateTeacher(Teacher teacher);
     /* 批量删除老师信息*/
     void delManyTeacher(int[] id);
+    /* 查询知识点一级目录 */
+    List<Point1> findPoint1All();
+    /* 增加一级目录 */
+    void addPoint1(Point1 point1);
+    /* 显示一级目录 */
+    List<Point1> Point1All();
 }

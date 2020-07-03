@@ -1,6 +1,7 @@
 package com.wj.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.wj.pojo.Point1;
 import com.wj.pojo.Teacher;
 import com.wj.pojo.User;
 import com.wj.service.UserService;
@@ -181,6 +182,47 @@ public class UserController {
     public String delManyTeacher(String chk_value){
         userServiceImpl.delManyTeacher(chk_value);
         return "redirect:findallteacher.do";
+    }
+
+    /**
+     * 知识点一级目录查询
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "findpoint1.do")
+    public String findPoint1(Model model){
+        List<Point1> point1All = userServiceImpl.findPoint1All();
+        model.addAttribute("point1",point1All);
+        return "page/admin/point";
+    }
+
+    /**
+     * 增加一级目录
+     * @param point1
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "addpoint1.do")
+    public String addPoint1(Point1 point1,Model model){
+        try {
+            userServiceImpl.addPoint1(point1);
+            model.addAttribute("message","保存章节成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:findpoint1.do";
+    }
+
+    /**
+     * 显示知识点一级目录
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "allpoint1.do")
+    @ResponseBody
+    public List<Point1> point1All(Model model){
+        List<Point1> point1s = userServiceImpl.point1All();
+        return point1s;
     }
 
 }

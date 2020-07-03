@@ -51,6 +51,30 @@
             #{id}
         </foreach>
     </delete>
+    <!-- 查询知识点一级目录 -->
+    <resultMap id="categoryBean" type="Point1">
+        <id column="cid" property="id"/>
+        <result column="cname" property="pointname"/>
+        <collection property="point2" ofType="Point2">
+            <id column="pid" property="bid"/>
+            <result column="pname" property="pname"/>
+        </collection>
+    </resultMap>
+    <select id="findPoint1All" resultMap="categoryBean" >
+        select c.*,p.*,c.id 'cid',p.bid 'pid',c.pointname 'cname',p.pname 'pname'
+        from Point1 c
+        left join point2 p on c.id=p.aid
+    </select>
+
+    <!-- 增加一级目录 -->
+    <insert id="addPoint1" parameterType="Point1">
+        insert into point1(pointname) values(#{pointname});
+    </insert>
+
+    <!-- 显示一级目录 -->
+    <select id="Point1All" resultType="Point1">
+        select * from point1;
+    </select>
 </mapper>
 
 

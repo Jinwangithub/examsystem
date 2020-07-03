@@ -1,5 +1,6 @@
 package com.wj.service;
 
+import com.wj.pojo.Point1;
 import com.wj.pojo.Teacher;
 import com.wj.pojo.User;
 import org.springframework.stereotype.Service;
@@ -27,4 +28,10 @@ public interface UserService {
     void updTeacher(Teacher teacher);
     /* 批量删除教师信息*/
     void delManyTeacher(String chk_value);
+    /* 知识点一级目录 */
+    List<Point1> findPoint1All();
+    /* 增加知识点一级目录 */
+    void addPoint1(Point1 point1);
+    /* 显示一级目录 */
+    List<Point1> point1All();
 }

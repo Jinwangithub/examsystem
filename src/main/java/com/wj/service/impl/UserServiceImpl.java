@@ -1,6 +1,7 @@
 package com.wj.service.impl;
 
 import com.wj.dao.UserMapper;
+import com.wj.pojo.Point1;
 import com.wj.pojo.Teacher;
 import com.wj.pojo.User;
 import com.wj.service.UserService;
@@ -60,6 +61,21 @@ public class UserServiceImpl implements UserService {
             ids[i]=Integer.valueOf(string[i]);
         }
         userMapper.delManyTeacher(ids);
+    }
+    /* 查询知识点一级目录 */
+    @Override
+    public List<Point1> findPoint1All() {
+        return userMapper.findPoint1All();
+    }
+    /* 增加知识点一级目录 */
+    @Override
+    public void addPoint1(Point1 point1) {
+       userMapper.addPoint1(point1);
+    }
+    /* 显示知识点一级目录 */
+    @Override
+    public List<Point1> point1All() {
+        return userMapper.Point1All();
     }
 
 }
