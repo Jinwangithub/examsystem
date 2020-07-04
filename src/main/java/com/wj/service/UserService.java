@@ -1,7 +1,9 @@
 package com.wj.service;
 
 import com.wj.pojo.Point1;
+import com.wj.pojo.Point2;
 import com.wj.pojo.Teacher;
+import com.wj.pojo.Tk.Choice;
 import com.wj.pojo.User;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +36,10 @@ public interface UserService {
     void addPoint1(Point1 point1);
     /* 显示一级目录 */
     List<Point1> point1All();
+    /* 增加二级目录 */
+    void addPoint2(Point2 point2);
+    /* 查询所有选择题 */
+    List<Choice> findChoiceAll();
+    /* 添加选择题 */
+    void addChioce(Choice choice);
 }

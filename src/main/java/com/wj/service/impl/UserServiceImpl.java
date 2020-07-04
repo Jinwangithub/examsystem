@@ -2,9 +2,12 @@ package com.wj.service.impl;
 
 import com.wj.dao.UserMapper;
 import com.wj.pojo.Point1;
+import com.wj.pojo.Point2;
 import com.wj.pojo.Teacher;
+import com.wj.pojo.Tk.Choice;
 import com.wj.pojo.User;
 import com.wj.service.UserService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,6 +79,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Point1> point1All() {
         return userMapper.Point1All();
+    }
+    /* 增加二级目录 */
+    @Override
+    public void addPoint2(Point2 point2) {
+        userMapper.addPoint2(point2);
+    }
+
+    /* 查询所有选择题 */
+    @Override
+    public List<Choice> findChoiceAll() {
+        List<Choice> choiceAll = userMapper.findChoiceAll();
+        //防止转义出错(SQL注入)
+        for(int i=0;i<choiceAll.size();i++){
+            String s = StringEscapeUtils.escapeHtml4(choiceAll.get(i).getContent());
+            choiceAll.get(i).setContent(s);
+        }
+        return choiceAll;
+    }
+    /* 添加选择题 */
+    @Override
+    public void addChioce(Choice choice) {
+        userMapper.addChoice(choice);
     }
 
 }

@@ -75,6 +75,19 @@
     <select id="Point1All" resultType="Point1">
         select * from point1;
     </select>
+    <!-- 增加二级目录 -->
+    <insert id="addPoint2" parameterType="Point2">
+        insert into point2(pname,aid) values(#{pname},#{aid});
+    </insert>
+    <!-- 查询所有选择题 -->
+    <select id="findChoiceAll" resultType="Choice">
+        select * from tk_choice
+    </select>
+    <!-- 添加选择题 -->
+    <insert id="addChoice" parameterType="Choice">
+        insert into tk_choice(content,aoption,boption,coption,doption,answer,analysis,chapter,chaptertwo,difficulty)
+        VALUES (#{content},#{aoption},#{boption},#{coption},#{doption},#{answer},#{analysis},#{chapter},#{chaptertwo},#{difficulty})
+    </insert>
 </mapper>
 
 

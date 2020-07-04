@@ -349,7 +349,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="my">添加小节</h4>
             </div>
-            <form class="form-horizontal">
+            <form class="form-horizontal" >
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">章节</label>
@@ -518,7 +518,7 @@
         });
     }
     $("#addp2but").click(function(){
-        alert($("#addp2 form").serialize())//序列化form上的数据
+        /*alert(*/$("#addp2 form").serialize()/*)*///序列化form上的数据
         $.ajax({
             url:"${APP_PATH}/user/addpoint2.do",
             type:"POST",

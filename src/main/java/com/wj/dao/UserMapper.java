@@ -2,7 +2,9 @@ package com.wj.dao;
 
 import com.wj.pojo.BasicInfo.Sit;
 import com.wj.pojo.Point1;
+import com.wj.pojo.Point2;
 import com.wj.pojo.Teacher;
+import com.wj.pojo.Tk.Choice;
 import com.wj.pojo.User;
 
 import java.util.List;
@@ -32,4 +34,10 @@ public interface UserMapper {
     void addPoint1(Point1 point1);
     /* 显示一级目录 */
     List<Point1> Point1All();
+    /* 增加二级目录 */
+    void addPoint2(Point2 point2);
+    /* 查询所有选择题 */
+    List<Choice> findChoiceAll();
+    /* 添加选择题 */
+    void addChoice(Choice choice);
 }

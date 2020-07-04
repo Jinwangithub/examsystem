@@ -1,8 +1,12 @@
 package com.wj.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.wj.pojo.Point1;
+import com.wj.pojo.Point2;
 import com.wj.pojo.Teacher;
+import com.wj.pojo.Tk.Choice;
 import com.wj.pojo.User;
 import com.wj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,6 +229,67 @@ public class UserController {
         return point1s;
     }
 
+    /**
+     * 增加二级目录
+     * @param point2
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "addpoint2.do")
+    public String addPoint2(Point2 point2,Model model){
+        try {
+            userServiceImpl.addPoint2(point2);
+            model.addAttribute("message","二级目录添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:findpoint1.do";
+    }
+
+    /**
+     * 选择题查询
+     * @param model
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "findallchoice.do")
+    public String findAllChoice(Model model,@RequestParam(defaultValue = "1")int pageNum){
+        PageHelper.startPage(pageNum,6);
+        List<Choice> choiceAll = userServiceImpl.findChoiceAll();
+        PageInfo pageInfo=new PageInfo(choiceAll,5);
+        model.addAttribute("pageInfo",pageInfo);
+        return "page/admin/tk_choice";
+    }
+
+    /**
+     * 查找所有知识点
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "pointall.do")
+    @ResponseBody
+    public List<Point1> pointAll(Model model){
+        List<Point1> point1All = userServiceImpl.findPoint1All();
+        model.addAttribute("point",point1All);
+        return point1All;
+    }
+
+    /**
+     * 添加选择题
+     * @param choice
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "addchoice.do")
+    public String addChoice(Choice choice,Model model){
+        try {
+            userServiceImpl.addChioce(choice);
+            model.addAttribute("message","选择题添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:findallchoice.do";
+    }
 }
 
 
