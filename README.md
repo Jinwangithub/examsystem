@@ -24,3 +24,8 @@
 
 
 2020-7-3 22:43 完成知识点一级目录的查询，显示，添加
+
+
+2020-7-4 17:50 完成二级知识点的查询、添加
+在选择题查询中（防止SQL注入，转义出错，使用StringEscapeUtils.escapeHtml4进行转义）以及使用com.github.pagehelper.PageHelper分页插件进行分页处理
+显示一级知识点于前台,对选择题完成添加操作（完成PageHelper.startPage原理探究）
