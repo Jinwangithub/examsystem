@@ -328,7 +328,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="my" style="text-align:center">添加题目</h4>
                     </div>
-                    <form class="form-horizontal" action="<%=basePath%>/tk/createjudge.do" method="post">
+                    <form class="form-horizontal" action="<%=basePath%>/tk/createjudge.do       " method="post">
                         <div class="modal-body">
                             <%--<input name="id" id="id" hidden="hidden"/>--%>
                             <div class="form-group input-group">

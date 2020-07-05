@@ -2,5 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wj.dao.ExamMapper">
-
+    <!-- 管理员查询考试信息 -->
+    <select id="allExam" resultType="ExamInformation">
+        select * from exam_information
+    </select>
+    <!-- 管理员创建考试信息 -->
+    <insert id="adminExamAdd" parameterType="ExamInformation">
+        insert into exam_information(examname,begindate,enddate,password,examtime,teacher,chaptertwo,choicenum,choicescore,
+           judgenum,judgescore,difficulty)
+        values(#{examname},
+         #{begindate},
+           #{enddate},
+                  #{password},
+                   #{examtime},
+                    #{teacher},
+                    #{chaptertwo},
+                    #{choicenum},
+                    #{choicescore},
+                    #{judgenum},
+                    #{judgescore},
+                    #{difficulty})
+    </insert>
+    <!-- 生成选择题 -->
+    <select id="RandChoice" resultType="PaperChoice">
+            select content,aoption,boption,coption,doption,answer from tk_choice
+            where chaptertwo=#{chaptertwo} and difficulty=#{difficulty}
+            order by RAND() limit #{choicenum}
+    </select>
+    <!-- 判断题生成 -->
+    <select id="RandJudge" resultType="PaperJudge">
+            select content,answer from tk_judge
+            where chaptertwo = #{chaptertwo} and  difficulty=#{difficulty}
+            order by RAND() limit #{judgenum}
+    </select>
+    <!-- 选择题试卷生成 -->
+    <insert id="insertRandChoice" parameterType="java.util.List">
+        insert into paper_choice(content, aoption,boption,coption,doption, answer ,examid)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.content},#{item.aoption},#{item.boption},#{item.coption},#{item.doption},#{item.answer},#{item.examid})
+        </foreach>
+    </insert>
+    <!-- 判断题试卷生成 -->
+    <insert id="insertRandJudge" parameterType="java.util.List">
+        insert into paper_judge(content,answer,examid)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.content},#{item.answer},#{item.examid})
+        </foreach>
+    </insert>
+    <!-- 获得试卷id -->
+    <select id="findExamId" parameterType="ExamInformation" resultType="ExamInformation">
+        select * from exam_information where examname=#{examname}
+    </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

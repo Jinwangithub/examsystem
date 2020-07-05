@@ -2,5 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wj.dao.JudgeMapper">
-
+    <!-- 查询所有判断题 -->
+    <select id="findAllJudge" resultType="Judge">
+      select * from tk_judge
+    </select>
+    <!-- 添加判断题 -->
+    <insert id="addJudge" parameterType="Judge">
+        insert into tk_judge(content,answer,analysis,chapter,chaptertwo,difficulty)
+        values(#{content},#{answer},#{analysis},#{chapter},#{chaptertwo},#{difficulty})
+    </insert>
 </mapper>
