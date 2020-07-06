@@ -55,6 +55,18 @@
     <select id="findExamId" parameterType="ExamInformation" resultType="ExamInformation">
         select * from exam_information where examname=#{examname}
     </select>
+    <!-- 通过id获取试卷基本信息 -->
+    <select id="findByExamId" parameterType="int" resultType="ExamInformation">
+        select * from exam_information where id=#{0}
+    </select>
+    <!--  通过examId获取选择题试卷  -->
+    <select id="findPaperChoiceByExamId" resultType="PaperChoice" parameterType="int">
+        select * from paper_choice where examid=#{0}
+    </select>
+    <!--  通过examId获取判断题试卷  -->
+    <select id="findPaperJudgeByExamId" resultType="PaperJudge" parameterType="int">
+        select * from paper_judge where examid=#{0}
+    </select>
 </mapper>
 
 

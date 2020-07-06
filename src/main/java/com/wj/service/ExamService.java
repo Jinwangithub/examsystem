@@ -21,4 +21,10 @@ public interface ExamService {
     void insertRandJudge(List<PaperJudge> paperJudges);
     /* 获得试卷id */
     ExamInformation findExamId(ExamInformation examInformation);
+    /* 通过id获取试卷基本信息 */
+    ExamInformation findByExamId(int id);
+    /* 通过examId获取选择题试卷 */
+    List<PaperChoice> findPaperChoiceByExamId(int examid);
+    /* 通过examId获取判断题试卷 */
+    List<PaperJudge> findPaperJudgeByExamId(int examid);
 }

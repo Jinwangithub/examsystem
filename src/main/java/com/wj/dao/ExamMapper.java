@@ -24,4 +24,10 @@ public interface ExamMapper {
     /* 获得试卷ID */
     ExamInformation findExamId(ExamInformation examInformation);
 
+    /* 通过id获取试卷基本信息 */
+    ExamInformation findByExamId(int examid);
+    /* 通过examId获取选择题试卷 */
+    List<PaperChoice> findPaperChoiceByExamId(int examid);
+    /* 通过examId获取判断题试卷 */
+    List<PaperJudge> findPaperJudgeByExamId(int examid);
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -67,6 +68,23 @@ public class ExamController {
         }
         examServiceImpl.insertRandJudge(paperJudges);//判断题试卷生成
         return "redirect:allexam.do";
+    }
+
+    /**
+     * 管理员查看考试试卷
+     * @param examid
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "admindetail.do")
+    public String adminExamDetail(@RequestParam int examid,Model model){
+        ExamInformation examInformation = examServiceImpl.findByExamId(examid);//获取试卷基本信息
+        List<PaperChoice> paperChoice = examServiceImpl.findPaperChoiceByExamId(examid);//获取选择题试卷
+        List<PaperJudge> paperJudge = examServiceImpl.findPaperJudgeByExamId(examid);//获取判断题试卷
+        model.addAttribute("examinfo",examInformation);
+        model.addAttribute("choice",paperChoice);
+        model.addAttribute("judge",paperChoice);
+        return "page/admin/exam_detail";
     }
 
 }

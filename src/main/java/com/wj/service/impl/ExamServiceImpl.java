@@ -49,4 +49,19 @@ public class ExamServiceImpl implements ExamService {
     public ExamInformation findExamId(ExamInformation examInformation) {
         return examMapper.findExamId(examInformation);
     }
+    /* 通过id获取试卷基本信息 */
+    @Override
+    public ExamInformation findByExamId(int id) {
+        return examMapper.findByExamId(id);
+    }
+    /* 通过examId获取选择题试卷 */
+    @Override
+    public List<PaperChoice> findPaperChoiceByExamId(int examid) {
+        return examMapper.findPaperChoiceByExamId(examid);
+    }
+    /* 通过examId获取判断题试卷 */
+    @Override
+    public List<PaperJudge> findPaperJudgeByExamId(int examid) {
+        return examMapper.findPaperJudgeByExamId(examid);
+    }
 }
