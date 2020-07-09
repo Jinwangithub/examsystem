@@ -67,6 +67,24 @@
     <select id="findPaperJudgeByExamId" resultType="PaperJudge" parameterType="int">
         select * from paper_judge where examid=#{0}
     </select>
+    <!-- 通过id查找学生考试 -->
+    <select id="ByStudentId" parameterType="int" resultType="ExamHistory">
+        select * from examhistory where studentid=#{0}
+    </select>
+    <!-- 通过试卷id查询所有考试信息 -->
+    <select id="AlreadExam" parameterType="java.util.List" resultType="ExamInformation">
+        select * from exam_information
+        where id in
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <!--  通过试卷id获取考试记录信息 -->
+    <select id="ByExamId" parameterType="int" resultType="ExamHistory">
+        select * from examhistory where examid=#{0} order by score desc
+    </select>
+
+
 </mapper>
 
 

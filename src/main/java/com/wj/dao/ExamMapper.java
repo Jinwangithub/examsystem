@@ -1,8 +1,10 @@
 package com.wj.dao;
 
+import com.wj.pojo.Exam.ExamHistory;
 import com.wj.pojo.Exam.ExamInformation;
 import com.wj.pojo.Exam.PaperChoice;
 import com.wj.pojo.Exam.PaperJudge;
+import com.wj.pojo.Student;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,4 +32,11 @@ public interface ExamMapper {
     List<PaperChoice> findPaperChoiceByExamId(int examid);
     /* 通过examId获取判断题试卷 */
     List<PaperJudge> findPaperJudgeByExamId(int examid);
+    /* 通过id查找学生考试 */
+    List<ExamHistory> ByStudentId(int id);
+    /* 通过试卷id查询所有考试信息 */
+    List<ExamInformation> AlreadExam(List<Long> longList);
+    /* 通过试卷id获取考试记录信息 */
+    List<ExamHistory> ByExamId(int examid);
+
 }

@@ -1,5 +1,6 @@
 package com.wj.service;
 
+import com.wj.pojo.Exam.ExamHistory;
 import com.wj.pojo.Exam.ExamInformation;
 import com.wj.pojo.Exam.PaperChoice;
 import com.wj.pojo.Exam.PaperJudge;
@@ -27,4 +28,10 @@ public interface ExamService {
     List<PaperChoice> findPaperChoiceByExamId(int examid);
     /* 通过examId获取判断题试卷 */
     List<PaperJudge> findPaperJudgeByExamId(int examid);
+    /* 通过学生id查询学生考试 */
+    List<ExamHistory> byStudentId(int id);
+    /* 通过试卷id查询所有考试信息 */
+    List<ExamInformation> AlreadExam(List<Long> longList);
+    /* 通过试卷id获取考试记录信息 */
+    List<ExamHistory> ByExamId(int examid);
 }

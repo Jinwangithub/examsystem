@@ -1,6 +1,7 @@
 package com.wj.service.impl;
 
 import com.wj.dao.ExamMapper;
+import com.wj.pojo.Exam.ExamHistory;
 import com.wj.pojo.Exam.ExamInformation;
 import com.wj.pojo.Exam.PaperChoice;
 import com.wj.pojo.Exam.PaperJudge;
@@ -63,5 +64,20 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public List<PaperJudge> findPaperJudgeByExamId(int examid) {
         return examMapper.findPaperJudgeByExamId(examid);
+    }
+    /* 通过学生id查询学生考试 */
+    @Override
+    public List<ExamHistory> byStudentId(int id) {
+        return examMapper.ByStudentId(id);
+    }
+    /* 通过试卷id查询所有考试信息 */
+    @Override
+    public List<ExamInformation> AlreadExam(List<Long> longList) {
+        return examMapper.AlreadExam(longList);
+    }
+    /* 通过试卷id获取考试记录信息 */
+    @Override
+    public List<ExamHistory> ByExamId(int examid) {
+        return examMapper.ByExamId(examid);
     }
 }
